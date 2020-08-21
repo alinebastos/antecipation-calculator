@@ -5,8 +5,10 @@ const app = express();
 const __dirname = path.resolve();
 const port = 3000;
 
+app.use(express.static(path.join(__dirname, "src")));
+
 app.get("/", (_, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.send(path.join(__dirname + "index.html"));
 });
 
 app.listen(port, () => {
