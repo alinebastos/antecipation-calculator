@@ -1,0 +1,13 @@
+{
+  "name": "antecipation-calculator",
+  "version": "1.0.0",
+  "description": "For the customers to know what amounts they will receive if they choose to anticipate receipt.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
