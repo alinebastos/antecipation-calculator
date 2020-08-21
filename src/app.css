@@ -115,7 +115,14 @@ h4 {
   font-size: 80%;
   color: #900;
   font-style: italic;
+}
+
+.error-message.hidden {
   display: none;
+}
+
+.error-message.show {
+  display: inline;
 }
 
 .parcelas-tip {
