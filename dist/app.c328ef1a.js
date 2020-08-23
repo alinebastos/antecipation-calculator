@@ -123,15 +123,15 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.format = void 0;
+exports.formatCurrency = void 0;
 const {
-  format
+  formatCurrency
 } = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
   maximumFractionDigits: 2
 });
-exports.format = format;
+exports.formatCurrency = formatCurrency;
 },{}],"components/UpdateResults.js":[function(require,module,exports) {
 "use strict";
 
@@ -148,10 +148,10 @@ let days30Result = document.getElementById("days30");
 let days90Result = document.getElementById("days90");
 
 const UpdateResults = data => {
-  tomorrowResult.textContent = (0, _formatPrice.format)(data[1] / 100);
-  days15Result.textContent = (0, _formatPrice.format)(data[15] / 100);
-  days30Result.textContent = (0, _formatPrice.format)(data[30] / 100);
-  days90Result.textContent = (0, _formatPrice.format)(data[90] / 100);
+  tomorrowResult.textContent = (0, _formatPrice.formatCurrency)(data[1] / 100);
+  days15Result.textContent = (0, _formatPrice.formatCurrency)(data[15] / 100);
+  days30Result.textContent = (0, _formatPrice.formatCurrency)(data[30] / 100);
+  days90Result.textContent = (0, _formatPrice.formatCurrency)(data[90] / 100);
 };
 
 var _default = UpdateResults;
@@ -168,7 +168,18 @@ let amount = document.getElementById("amount");
 let installments = document.getElementById("installments");
 let mdr = document.getElementById("mdr");
 let errorMessage = document.getElementById("error-message");
-let timer;
+let timer; // Money Mask
+
+function money(value) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  }).format(+value.replace(/\D+/g, "") / 100);
+}
+
+amount.addEventListener("input", e => {
+  e.target.value = money(e.target.value);
+}, false); // Post Data
 
 async function postData(url = "", data = {}) {
   const response = await fetch(url, {
@@ -191,7 +202,7 @@ card.addEventListener("keyup", event => {
 
 const postDataFunction = () => {
   postData("https://hash-front-test.herokuapp.com/", {
-    amount: amount.value * 100,
+    amount: +amount.value.replace(/\D+/, "") / 100 * 100,
     installments: installments.value,
     mdr: mdr.value,
     days: [1, 15, 30, 90]
@@ -228,7 +239,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44795" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39243" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

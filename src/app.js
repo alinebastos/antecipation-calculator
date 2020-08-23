@@ -7,6 +7,23 @@ let mdr = document.getElementById("mdr");
 let errorMessage = document.getElementById("error-message");
 let timer;
 
+// Money Mask
+function money(value) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(+value.replace(/\D+/g, "") / 100);
+}
+
+amount.addEventListener(
+  "input",
+  (e) => {
+    e.target.value = money(e.target.value);
+  },
+  false
+);
+
+// Post Data
 async function postData(url = "", data = {}) {
   const response = await fetch(url, {
     method: "POST",
@@ -30,7 +47,7 @@ card.addEventListener("keyup", (event) => {
 
 const postDataFunction = () => {
   postData("https://hash-front-test.herokuapp.com/", {
-    amount: amount.value * 100,
+    amount: (+amount.value.replace(/\D+/, "") /100) * 100,
     installments: installments.value,
     mdr: mdr.value,
     days: [1, 15, 30, 90],

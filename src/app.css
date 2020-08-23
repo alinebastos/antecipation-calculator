@@ -113,7 +113,7 @@ h4 {
 
 .error-message {
   font-size: 80%;
-  color: #900;
+  color: rgb(219, 103, 103);
   font-style: italic;
   display: none;
   transition: all 1s;
