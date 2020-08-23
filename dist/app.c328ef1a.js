@@ -124,13 +124,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.formatCurrency = void 0;
-const {
-  formatCurrency
-} = new Intl.NumberFormat("pt-BR", {
+
+const formatCurrency = value => new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
   maximumFractionDigits: 2
-});
+}).format(value);
+
 exports.formatCurrency = formatCurrency;
 },{}],"components/UpdateResults.js":[function(require,module,exports) {
 "use strict";
@@ -140,7 +140,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _formatPrice = require("../utils/format-price.js");
+var _formatPrice = _interopRequireDefault(require("../utils/format-price.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 let tomorrowResult = document.getElementById("tomorrow");
 let days15Result = document.getElementById("days15");
@@ -148,10 +150,10 @@ let days30Result = document.getElementById("days30");
 let days90Result = document.getElementById("days90");
 
 const UpdateResults = data => {
-  tomorrowResult.textContent = (0, _formatPrice.formatCurrency)(data[1] / 100);
-  days15Result.textContent = (0, _formatPrice.formatCurrency)(data[15] / 100);
-  days30Result.textContent = (0, _formatPrice.formatCurrency)(data[30] / 100);
-  days90Result.textContent = (0, _formatPrice.formatCurrency)(data[90] / 100);
+  tomorrowResult.textContent = (0, _formatPrice.default)(data[1] / 100);
+  days15Result.textContent = (0, _formatPrice.default)(data[15] / 100);
+  days30Result.textContent = (0, _formatPrice.default)(data[30] / 100);
+  days90Result.textContent = (0, _formatPrice.default)(data[90] / 100);
 };
 
 var _default = UpdateResults;
@@ -202,7 +204,7 @@ card.addEventListener("keyup", event => {
 
 const postDataFunction = () => {
   postData("https://hash-front-test.herokuapp.com/", {
-    amount: +amount.value.replace(/\D+/, "") / 100 * 100,
+    amount: +amount.value.replace(/\D+/g, "") / 100,
     installments: installments.value,
     mdr: mdr.value,
     days: [1, 15, 30, 90]
@@ -239,7 +241,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39243" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41933" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

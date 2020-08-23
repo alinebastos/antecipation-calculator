@@ -47,7 +47,7 @@ card.addEventListener("keyup", (event) => {
 
 const postDataFunction = () => {
   postData("https://hash-front-test.herokuapp.com/", {
-    amount: (+amount.value.replace(/\D+/, "") /100) * 100,
+    amount: +amount.value.replace(/\D+/g, "") / 100,
     installments: installments.value,
     mdr: mdr.value,
     days: [1, 15, 30, 90],
