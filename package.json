@@ -2,17 +2,23 @@
   "name": "antecipation-calculator",
   "version": "1.0.0",
   "description": "For the customers to know what amounts they will receive if they choose to anticipate receipt.",
-  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "parcel src/index.html",
+    "build-prod": "parcel build src/index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.4"
+    "parcel": "^1.12.4"
+  },
+  "browserslist": [
+    "last 3 Chrome versions",
+    "Firefox 63",
+    "Node 11"
+  ],
+  "browser": {
+    "process": false
   }
 }

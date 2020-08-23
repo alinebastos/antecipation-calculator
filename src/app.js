@@ -1,10 +1,10 @@
 import UpdateResults from "./components/UpdateResults.js";
 
-let card = document.querySelector("#card");
-let amount = document.querySelector("#amount");
-let installments = document.querySelector("#installments");
-let mdr = document.querySelector("#mdr");
-let errorMessage = document.querySelector("#error-message");
+let card = document.getElementById("card");
+let amount = document.getElementById("amount");
+let installments = document.getElementById("installments");
+let mdr = document.getElementById("mdr");
+let errorMessage = document.getElementById("error-message");
 let timer;
 
 async function postData(url = "", data = {}) {
@@ -20,14 +20,12 @@ async function postData(url = "", data = {}) {
 
 card.addEventListener("keyup", (event) => {
   clearTimeout(timer);
-  errorMessage.classList.add("hidden") &&
   errorMessage.classList.remove("show");
   timer = setTimeout(() => {
     amount.value && installments.value && mdr.value
-      ? postDataFunction()
-      : errorMessage.classList.add("show") &&
-        errorMessage.classList.remove("hidden");
-  }, 1000);
+      ? postDataFunction() && errorMessage.classList.remove("show")
+      : errorMessage.classList.add("show")
+  }, 500);
 });
 
 const postDataFunction = () => {
