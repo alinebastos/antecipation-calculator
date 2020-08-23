@@ -1,27 +1,11 @@
 import UpdateResults from "./components/UpdateResults.js";
 
 let card = document.getElementById("card");
-let amount = document.getElementById("amount");
+export let amount = document.getElementById("amount");
 let installments = document.getElementById("installments");
 let mdr = document.getElementById("mdr");
 let errorMessage = document.getElementById("error-message");
 let timer;
-
-// Money Mask
-function money(value) {
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(+value.replace(/\D+/g, "") / 100);
-}
-
-amount.addEventListener(
-  "input",
-  (e) => {
-    e.target.value = money(e.target.value);
-  },
-  false
-);
 
 // Post Data
 async function postData(url = "", data = {}) {
@@ -47,7 +31,7 @@ card.addEventListener("keyup", (event) => {
 
 const postDataFunction = () => {
   postData("https://hash-front-test.herokuapp.com/", {
-    amount: +amount.value.replace(/\D+/g, "") / 100,
+    amount: +amount.value.replace(/\D+/g, ""),
     installments: installments.value,
     mdr: mdr.value,
     days: [1, 15, 30, 90],
