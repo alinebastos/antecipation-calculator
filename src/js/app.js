@@ -5,6 +5,7 @@ let amount = document.getElementById("amount");
 let installments = document.getElementById("installments");
 let mdr = document.getElementById("mdr");
 let errorMessage = document.getElementById("error-message");
+let spinner = document.getElementById("spinner");
 let timer;
 
 // Money Input Mask
@@ -39,10 +40,14 @@ card.addEventListener("keyup", (event) => {
   clearTimeout(timer);
   errorMessage.classList.remove("show");
   timer = setTimeout(() => {
-    amount.value && installments.value && mdr.value
-      ? postDataFunction() && errorMessage.classList.remove("show")
-      : errorMessage.classList.add("show")
-  }, 500);
+    if (amount.value && installments.value && mdr.value) {
+      spinner.classList.add("show");
+      postDataFunction();
+      errorMessage.classList.remove("show");
+    } else {
+      errorMessage.classList.add("show");
+    }
+  }, 1000);
 });
 
 const postDataFunction = () => {
@@ -53,6 +58,7 @@ const postDataFunction = () => {
     days: [1, 15, 30, 90],
   }).then((data) => {
     console.log(data);
+    spinner.classList.remove("show");
     UpdateResults(data);
   });
 };
