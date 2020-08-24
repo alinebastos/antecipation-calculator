@@ -1,4 +1,4 @@
-import UpdateResults from "./components/UpdateResults.js";
+import UpdateResults from "../components/UpdateResults.js";
 
 let card = document.getElementById("card");
 let amount = document.getElementById("amount");
