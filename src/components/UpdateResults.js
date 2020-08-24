@@ -1,4 +1,4 @@
-import {formatCurrency} from "../utils/format-price.js";
+import { formatCurrency } from "../utils/format-price.js";
 
 let tomorrowResult = document.getElementById("tomorrow");
 let days15Result = document.getElementById("days15");

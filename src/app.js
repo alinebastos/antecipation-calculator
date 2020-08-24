@@ -1,11 +1,27 @@
 import UpdateResults from "./components/UpdateResults.js";
 
 let card = document.getElementById("card");
-export let amount = document.getElementById("amount");
+let amount = document.getElementById("amount");
 let installments = document.getElementById("installments");
 let mdr = document.getElementById("mdr");
 let errorMessage = document.getElementById("error-message");
 let timer;
+
+// Money Input Mask
+function money(value) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(+value.replace(/\D+/g, "") / 100);
+}
+
+amount.addEventListener(
+  "input",
+  (e) => {
+    e.target.value = money(e.target.value);
+  },
+  false
+);
 
 // Post Data
 async function postData(url = "", data = {}) {
