@@ -19,14 +19,14 @@ For the compilation, cache, bundle and live reload I use [Parcel](https://parcel
 
 Follow the steps below to run the application:
 
-- Clone the repository: $ git clone git@github.com:alinebastos/antecipation-calculator.git;
-- Enter the root of the project: $ cd anticepation-calculator;
-- Install the dependencies. If you use NPM, run the command: $ npm install. If you use yarn, run $ yarn;
+- Clone the repository: `$ git clone git@github.com:alinebastos/antecipation-calculator.git`;
+- Enter the root of the project: `$ cd anticepation-calculator`;
+- Install the dependencies. If you use NPM, run the command `$ npm install`, if you use yarn, run `$ yarn`;
 
 The application has some scripts that can be executed using `npm run` or `yarn`.
 
 Available scripts:
 
-- start: Starts the application with live reloading;
-- build-prod: Build the project to production;
-- cypress: Run the tests with Cypress.
+- `start`: Starts the application with live reloading;
+- `build-prod`: Build the project to production;
+- `cypress`: Run the tests with Cypress.
