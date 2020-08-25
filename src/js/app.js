@@ -1,15 +1,8 @@
 import UpdateResults from "../components/UpdateResults.js";
 
-let card = document.getElementById("card");
-let amount = document.getElementById("amount");
-let installments = document.getElementById("installments");
-let mdr = document.getElementById("mdr");
-let errorMessage = document.getElementById("error-message");
-let spinner = document.getElementById("spinner");
-let timer;
-
 // Money Input Mask
-function money(value) {
+
+const money = (value) => {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
@@ -25,7 +18,8 @@ amount.addEventListener(
 );
 
 // Post Data
-async function postData(url = "", data = {}) {
+
+const postData = async (url = "", data = {}) => {
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -36,9 +30,18 @@ async function postData(url = "", data = {}) {
   return response.json();
 }
 
+const card = document.getElementById("card");
+
 card.addEventListener("keyup", (event) => {
+
+  const errorMessage = document.getElementById("error-message");
+  const spinner = document.getElementById("spinner");
+  let timer;
+
   clearTimeout(timer);
+
   errorMessage.classList.remove("show");
+  
   timer = setTimeout(() => {
     if (amount.value && installments.value && mdr.value) {
       spinner.classList.add("show");
@@ -47,17 +50,21 @@ card.addEventListener("keyup", (event) => {
     } else {
       errorMessage.classList.add("show");
     }
-  }, 700);
+  }, 1000);
 });
 
 const postDataFunction = () => {
+
+  const amount = document.getElementById("amount");
+  const installments = document.getElementById("installments");
+  const mdr = document.getElementById("mdr");
+
   postData("https://hash-front-test.herokuapp.com/", {
     amount: +amount.value.replace(/\D+/g, ""),
     installments: installments.value,
     mdr: mdr.value,
     days: [1, 15, 30, 90],
   }).then((data) => {
-    console.log(data);
     spinner.classList.remove("show");
     UpdateResults(data);
   });
