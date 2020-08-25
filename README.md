@@ -15,6 +15,8 @@ For the testing, I chose to use [Cypress](https://www.cypress.io/) because I wan
 
 For the compilation, cache, bundle and live reload I use [Parcel](https://parceljs.org/).
 
+The deploy was made with [Netlify](https://www.netlify.com/) and the application URL is [Antecipation Calculator](https://blissful-blackwell-b15dde.netlify.app/).
+
 ## Installation
 
 Follow the steps below to run the application:
