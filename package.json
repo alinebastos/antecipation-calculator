@@ -4,15 +4,12 @@
   "description": "For the customers to know what amounts they will receive if they choose to anticipate receipt.",
   "scripts": {
     "start": "parcel src/index.html",
-    "build-prod": "parcel build src/index.html"
+    "build-prod": "parcel build src/index.html",
+    "cypress": "cypress open"
   },
   "keywords": [],
   "author": "Aline Bastos",
   "license": "ISC",
-  "type": "module",
-  "dependencies": {
-    "parcel": "^1.12.4"
-  },
   "browserslist": [
     "last 3 Chrome versions",
     "Firefox 63",
@@ -20,5 +17,9 @@
   ],
   "browser": {
     "process": false
+  },
+  "devDependencies": {
+    "cypress": "^5.0.0",
+    "parcel-bundler": "^1.12.4"
   }
 }

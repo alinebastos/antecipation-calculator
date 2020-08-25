@@ -47,7 +47,7 @@ card.addEventListener("keyup", (event) => {
     } else {
       errorMessage.classList.add("show");
     }
-  }, 1000);
+  }, 700);
 });
 
 const postDataFunction = () => {
