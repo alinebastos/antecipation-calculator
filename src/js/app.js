@@ -52,7 +52,7 @@ const postDataFunction = () => {
   loading = true;
 
   postData(
-    "https://hash-front-test.herokuapp.com/?delay=10000",
+    "https://hash-front-test.herokuapp.com/",
     {
       amount: +amount.value.replace(/\D+/g, ""),
       installments: installments.value,
