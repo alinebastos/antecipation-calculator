@@ -1,5 +1,3 @@
-let loading = false;
-
 const messages = [
   'Ainda buscando dados...',
   'A API está demorando, mas em alguns instantes ela volta...',
@@ -8,6 +6,7 @@ const messages = [
 ];
 
 export const delayMessages = () => {
+  let loading = false;
   const responseError = document.getElementById("error");
   setTimeout(() => {
     if (!loading)

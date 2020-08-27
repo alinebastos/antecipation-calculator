@@ -33,7 +33,6 @@ card.addEventListener("keyup", (event) => {
   if (amount.value && installments.value && mdr.value) {
     spinner.classList.add("show");
     postDataFunction();
-    //delayMessages();
     errorMessage.classList.remove("show");
   } else {
     errorMessage.classList.add("show");
@@ -57,8 +56,7 @@ const postDataFunction = () => {
       days: [1, 15, 30, 90],
     }
   ).then((data) => {
-    spinner.classList.remove("show");
     UpdateResults(data);
-    console.log(data);
+    spinner.classList.remove("show");
   });
 };
