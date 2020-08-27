@@ -39,8 +39,9 @@ h4 {
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 377px;
   margin: 30px auto;
+  position: relative;
 }
 
 @media screen and (min-width: 768px) {
@@ -48,6 +49,25 @@ h4 {
     flex-direction: row;
     width: 608px;
     height: 390px;
+  }
+}
+
+.error {
+  position: absolute;
+  top: -50px;
+  left: 10px;
+  right: 10px;
+  text-align: center;
+  margin: 0;
+  color: #3d75bb;
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .error {
+    top: -50px;
+    left: 80px;
+    right: 80px;
   }
 }
 
@@ -72,7 +92,7 @@ h4 {
   align-content: stretch;
 }
 
-@media screen and (min-width: 414px) {
+@media screen and (min-width: 768px) {
   .card-result {
     width: 231px;
     padding: 83px 35px;
@@ -84,6 +104,21 @@ h4 {
   font-size: 24px;
   line-height: 30px;
   white-space: nowrap;
+  position: relative;
+}
+
+.error-message {
+  font-size: 11px;
+  color: red;
+  font-style: italic;
+  position: absolute;
+  top: 25px;
+  display: none;
+  font-weight: normal;
+}
+
+.error-message.show {
+  display: block;
 }
 
 .label {
@@ -110,19 +145,6 @@ h4 {
   border: 1px solid #66afe9;
   outline-color: transparent;
   outline-style: inset;
-}
-
-.error-message {
-  font-size: 80%;
-  color: rgb(219, 103, 103);
-  font-style: italic;
-  display: none;
-  transition: all 1s;
-}
-
-.error-message.show {
-  display: inline;
-  transition: all 1s;
 }
 
 .parcelas-tip {
