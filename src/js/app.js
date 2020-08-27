@@ -46,6 +46,8 @@ const postDataFunction = () => {
   const amount = document.getElementById("amount");
   const installments = document.getElementById("installments");
   const mdr = document.getElementById("mdr");
+  const responseError = document.getElementById("error");
+  loading = true;
 
   postData(
     "https://hash-front-test.herokuapp.com/",
@@ -58,5 +60,27 @@ const postDataFunction = () => {
   ).then((data) => {
     UpdateResults(data);
     spinner.classList.remove("show");
+    loading = false;
+    responseError.innerHTML = '';
   });
+};
+
+
+// Delay
+
+const messages = [
+  "Ainda buscando dados...",
+  "A API está demorando, mas em alguns instantes ela volta...",
+  "A conexão pode estar lenta...",
+  "Está demorando mais que o esperado, aguarde...",
+];
+
+const delayMessages = () => {
+  const responseError = document.getElementById("error");
+  setTimeout(() => {
+    if (!loading) return
+      responseError.innerText =
+        messages[Math.floor(Math.random() * messages.length)];
+    delayMessages();
+  }, 3000);
 };
