@@ -1,10 +1,11 @@
 import UpdateResults from "../components/UpdateResults.js";
 import { MoneyMask } from "../components/MoneyMask";
-import { delayMessages } from "../components/DelaySlowConection";
 import { timeoutExternalError } from "../components/TimeoutExternalError";
 
 
 // Post Data
+
+let loading = false;
 
 const postData = async (url = "", data = {}) => {
   const response = await fetch(url, {
@@ -32,6 +33,7 @@ card.addEventListener("keyup", (event) => {
   
   if (amount.value && installments.value && mdr.value) {
     spinner.classList.add("show");
+    delayMessages();
     postDataFunction();
     errorMessage.classList.remove("show");
   } else {
@@ -50,7 +52,7 @@ const postDataFunction = () => {
   loading = true;
 
   postData(
-    "https://hash-front-test.herokuapp.com/",
+    "https://hash-front-test.herokuapp.com/?delay=10000",
     {
       amount: +amount.value.replace(/\D+/g, ""),
       installments: installments.value,

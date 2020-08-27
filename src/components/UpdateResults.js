@@ -11,8 +11,6 @@ const UpdateResults = (data) => {
   days15Result.textContent = isNaN(data[1]) ? "R$ 0,00" : formatCurrency(data[15] / 100);
   days30Result.textContent = isNaN(data[1]) ? "R$ 0,00" : formatCurrency(data[30] / 100);
   days90Result.textContent = isNaN(data[1]) ? "R$ 0,00" : formatCurrency(data[90] / 100);
-
-  console.log(data);
 };
 
 export default UpdateResults;
