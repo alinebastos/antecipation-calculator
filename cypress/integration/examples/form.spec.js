@@ -26,5 +26,5 @@ describe("Aplication Form", () => {
     }).then((response) => {
       expect(response.status).to.eq(200);
     });
-  })
+  });
 });

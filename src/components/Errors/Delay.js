@@ -8,8 +8,7 @@ const messages = [
 ];
 export let delayMessages = () => {
   setTimeout(() => {
-    if (!loading)
-      return;
+    if (!loading) return;
     responseError.innerText =
       messages[Math.floor(Math.random() * messages.length)];
     delayMessages();

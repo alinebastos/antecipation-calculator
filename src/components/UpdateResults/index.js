@@ -1,7 +1,6 @@
 import { FormatCurrency } from "../../utils/Currency.js";
 
 const UpdateResults = (data) => {
-
   const tomorrowResult = document.getElementById("tomorrow");
   const days15Result = document.getElementById("days15");
   const days30Result = document.getElementById("days30");
