@@ -32,3 +32,4 @@ Available scripts:
 - `start`: Starts the application with live reloading;
 - `build-prod`: Build the project to production;
 - `cypress`: Run the tests with Cypress.
+- `format`: Format the files with Prettier.
