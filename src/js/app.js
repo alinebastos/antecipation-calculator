@@ -1,11 +1,11 @@
 import UpdateResults from "../components/UpdateResults.js";
 import { MoneyMask } from "../components/MoneyMask";
-import { timeoutExternalError } from "../components/TimeoutExternalError";
 
+const card = document.getElementById("card");
+const responseError = document.getElementById("error");
+let loading = false;
 
 // Post Data
-
-let loading = false;
 
 const postData = async (url = "", data = {}) => {
   const response = await fetch(url, {
@@ -16,73 +16,86 @@ const postData = async (url = "", data = {}) => {
     body: JSON.stringify(data),
   });
 
-  timeoutExternalError(response);
+  loading = false;
+
+  timeoutInternalError(response);
   return response.json();
-}
-
-
-const card = document.getElementById("card");
+};
 
 card.addEventListener("keyup", (event) => {
-
   const errorMessage = document.getElementById("error-message");
   const spinner = document.getElementById("spinner");
-  let timer;
 
-  clearTimeout(timer); 
-  
   if (amount.value && installments.value && mdr.value) {
     spinner.classList.add("show");
+    loading = true;
     delayMessages();
     postDataFunction();
     errorMessage.classList.remove("show");
   } else {
     errorMessage.classList.add("show");
   }
-  
 });
 
-
 const postDataFunction = () => {
-
   const amount = document.getElementById("amount");
   const installments = document.getElementById("installments");
   const mdr = document.getElementById("mdr");
-  const responseError = document.getElementById("error");
   loading = true;
 
-  postData(
-    "https://hash-front-test.herokuapp.com/",
-    {
-      amount: +amount.value.replace(/\D+/g, ""),
-      installments: installments.value,
-      mdr: mdr.value,
-      days: [1, 15, 30, 90],
-    }
-  ).then((data) => {
+  postData("https://hash-front-test.herokuapp.com/?delay=10000", {
+    amount: +amount.value.replace(/\D+/g, ""),
+    installments: installments.value,
+    mdr: mdr.value,
+    days: [1, 15, 30, 90],
+  }).then((data) => {
     UpdateResults(data);
     spinner.classList.remove("show");
-    loading = false;
-    responseError.innerHTML = '';
   });
 };
-
 
 // Delay
 
 const messages = [
-  "Ainda buscando dados...",
+  "Buscando dados...",
   "A API está demorando, mas em alguns instantes ela volta...",
   "A conexão pode estar lenta...",
   "Está demorando mais que o esperado, aguarde...",
 ];
 
-const delayMessages = () => {
-  const responseError = document.getElementById("error");
+let delayMessages = () => {
   setTimeout(() => {
-    if (!loading) return
-      responseError.innerText =
-        messages[Math.floor(Math.random() * messages.length)];
+    if (!loading) return;
+    responseError.innerText =
+      messages[Math.floor(Math.random() * messages.length)];
     delayMessages();
-  }, 3000);
+  }, 2500);
 };
+
+// Timeout or Internal Error
+
+const timeoutInternalError = (response) => {
+  responseError.innerText = "";
+
+  if (response.status === 408) {
+    responseError.innerHTML =
+      "Excedeu o tempo de resposta da API. Por favor, tente mais tarde.";
+  } else if (response.status === 500) {
+    responseError.innerHTML =
+      "Internal Server Error. Por favor, tente mais tarde.";
+  }
+};
+
+// User offline
+
+const updateOnlineStatus = () => {
+  if (navigator.onLine) {
+    responseError.innerHTML = "Sua conexão com a internet foi restabelecida.";
+    setTimeout(() => (responseError.innerHTML = ""), 10000);
+  } else {
+    responseError.innerHTML = "Você está sem conexão com a internet.";
+  }
+};
+
+window.addEventListener("online", updateOnlineStatus);
+window.addEventListener("offline", updateOnlineStatus);
