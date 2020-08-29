@@ -1,9 +1,12 @@
-import UpdateResults from "../components/UpdateResults.js";
+import UpdateResults from "../components/UpdateResults/index.js";
 import { MoneyMask } from "../utils/Currency";
+import { updateOnlineStatus } from "../components/Errors/UserOffline";
+import { timeoutInternalError } from "../components/Errors/TimeoutInternalError";
+import { delayMessages } from "../components/Errors/Delay";
 
 const card = document.getElementById("card");
-const responseError = document.getElementById("error");
-let loading = false;
+export const responseError = document.getElementById("error");
+export let loading = false;
 
 // Post Data
 
@@ -43,7 +46,7 @@ const postDataFunction = () => {
   const mdr = document.getElementById("mdr");
   loading = true;
 
-  postData("https://hash-front-test.herokuapp.com/", {
+  postData("https://hash-front-test.herokuapp.com/?internalError", {
     amount: +amount.value.replace(/\D+/g, ""),
     installments: installments.value,
     mdr: mdr.value,
@@ -53,49 +56,3 @@ const postDataFunction = () => {
     spinner.classList.remove("show");
   });
 };
-
-// Delay
-
-const messages = [
-  "Buscando dados...",
-  "A API está demorando, mas em alguns instantes ela volta...",
-  "A conexão pode estar lenta...",
-  "Está demorando mais que o esperado, aguarde...",
-];
-
-let delayMessages = () => {
-  setTimeout(() => {
-    if (!loading) return;
-    responseError.innerText =
-      messages[Math.floor(Math.random() * messages.length)];
-    delayMessages();
-  }, 2500);
-};
-
-// Timeout or Internal Error
-
-const timeoutInternalError = (response) => {
-  responseError.innerText = "";
-
-  if (response.status === 408) {
-    responseError.innerHTML =
-      "Excedeu o tempo de resposta da API. Por favor, tente mais tarde.";
-  } else if (response.status === 500) {
-    responseError.innerHTML =
-      "Internal Server Error. Por favor, tente mais tarde.";
-  }
-};
-
-// User offline
-
-const updateOnlineStatus = () => {
-  if (navigator.onLine) {
-    responseError.innerHTML = "Sua conexão com a internet foi restabelecida.";
-    setTimeout(() => (responseError.innerHTML = ""), 10000);
-  } else {
-    responseError.innerHTML = "Você está sem conexão com a internet.";
-  }
-};
-
-window.addEventListener("online", updateOnlineStatus);
-window.addEventListener("offline", updateOnlineStatus);

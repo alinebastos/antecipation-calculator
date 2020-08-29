@@ -1,4 +1,4 @@
-import { FormatCurrency } from "../utils/Currency.js";
+import { FormatCurrency } from "../../utils/Currency.js";
 
 const UpdateResults = (data) => {
 
