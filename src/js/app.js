@@ -1,5 +1,5 @@
 import UpdateResults from "../components/UpdateResults.js";
-import { MoneyMask } from "../components/MoneyMask";
+import { MoneyMask } from "../utils/Currency";
 
 const card = document.getElementById("card");
 const responseError = document.getElementById("error");
@@ -43,7 +43,7 @@ const postDataFunction = () => {
   const mdr = document.getElementById("mdr");
   loading = true;
 
-  postData("https://hash-front-test.herokuapp.com/?delay=10000", {
+  postData("https://hash-front-test.herokuapp.com/", {
     amount: +amount.value.replace(/\D+/g, ""),
     installments: installments.value,
     mdr: mdr.value,
