@@ -4,7 +4,7 @@ Today our customers need to know how much it costs to anticipate a transaction, 
 
 ## Decisions regarding the development
 
-Since, for now, it is a small application, I decided to maintain as simple as possible, with pure HTML, CSS, and JavaScript.
+Since, for now, it is a small application, I decided to maintain as simple as possible, with pure HTML, CSS (even though I am very experienced with SASS, LESS, [styled-components](https://braziljs.org/blog/css-no-javascript-aprendendo-usar-styled-components/) and CSS-in-JS, I even wrote [articles](https://imasters.com.br/css/css-no-javascript-em-componentes-react-quais-vantagens-e-desvantagens) about that), and JavaScript.
 
 - It's easier to maintain, with few files and small components;
 - It's easy to change the code and files if the application goes bigger or we decide to use a framework instead;
