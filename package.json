@@ -5,7 +5,8 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build-prod": "parcel build src/index.html",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "format": "prettier --write \"**/*.{css,html,yml,js,json,md}\""
   },
   "keywords": [],
   "author": "Aline Bastos",
@@ -21,5 +22,8 @@
   "devDependencies": {
     "cypress": "^5.0.0",
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "prettier": "^2.1.1"
   }
 }
