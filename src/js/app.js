@@ -46,7 +46,7 @@ const postDataFunction = () => {
   const mdr = document.getElementById("mdr");
   loading = true;
 
-  postData("https://hash-front-test.herokuapp.com/?internalError", {
+  postData("https://hash-front-test.herokuapp.com/", {
     amount: +amount.value.replace(/\D+/g, ""),
     installments: installments.value,
     mdr: mdr.value,
