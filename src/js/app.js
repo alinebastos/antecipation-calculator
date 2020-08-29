@@ -20,7 +20,6 @@ const postData = async (url = "", data = {}) => {
   });
 
   loading = false;
-
   timeoutInternalError(response);
   return response.json();
 };
